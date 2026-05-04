@@ -62,6 +62,7 @@ tool_version="$(python <<< ${version_command})"
 #   None
 ###############################################################################
 install_uv () {
+  export PATH="$repo_root/.uv:$PATH"
   if command -v uv >/dev/null 2>&1; then
     echo -e "${BIGreen}>>>${RST} uv already installed: $(uv --version)"
     return 0
@@ -70,7 +71,6 @@ install_uv () {
   export UV_UNMANAGED_INSTALL="$repo_root/.uv"
   command -v curl >/dev/null 2>&1 || { echo -e "${BIRed}!!!${RST}${BIYellow} Missing ${RST}${BIBlue}curl${BIYellow} command.${RST}"; return 1; }
   curl -LsSf https://astral.sh/uv/install.sh | sh
-  export PATH="$repo_root/.uv/bin:$PATH"
 }
 
 ##############################################################################
