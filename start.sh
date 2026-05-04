@@ -206,8 +206,12 @@ main() {
   function_name="$(echo "$1" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z]*//g')"
 
   case $function_name in
-    "install")
-      install || return_code=$?
+    "dockercreate")
+      create_package_with_docker "${@:2}" || return_code=$?
+      exit $return_code
+      ;;
+    "builddocker")
+      create_docker_image "${@:2}" || return_code=$?
       exit $return_code
       ;;
     "setenv")
@@ -223,6 +227,10 @@ main() {
   fi
 
   case $function_name in
+    "install")
+      install || return_code=$?
+      exit $return_code
+      ;;
     "listen")
       listen "${@:2}" || return_code=$?
       exit $return_code
@@ -233,14 +241,6 @@ main() {
       ;;
     "listbundles")
       list_bundles "${@:2}" || return_code=$?
-      exit $return_code
-      ;;
-    "dockercreate")
-      create_package_with_docker "${@:2}" || return_code=$?
-      exit $return_code
-      ;;
-    "builddocker")
-      create_docker_image "${@:2}" || return_code=$?
       exit $return_code
       ;;
   esac
