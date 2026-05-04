@@ -162,7 +162,7 @@ create_package_with_docker() {
     return 1
   fi
   image_name="ynput/ayon-dependencies-$variant:$tool_version"
-  if [ -z "$(docker images -q image_name 2> /dev/null)" ]; then
+  if [ -z "$(docker images -q $image_name 2> /dev/null)" ]; then
     create_docker_image_private $variant
   fi
 
