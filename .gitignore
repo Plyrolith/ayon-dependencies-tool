@@ -5,6 +5,9 @@ package/*
 /.poetry
 .pytest_cache
 
+# uv
+/.uv
+
 ### Python template
 # Byte-compiled / optimized / DLL files
 .python-version
